@@ -14,8 +14,8 @@ db.on("error", error => {
 
 // HOUSES
 const houseGH = {
-    "house" : "Githubblepuff",
-    "master" : "Lily Tomlin",
+    "house" : "GitHufflePuff",
+    "master" : "",
     "points" : 0,
     "weekpoints" : 0,
     "owl" : false,
@@ -23,8 +23,8 @@ const houseGH = {
     "owlimage" : "gh_owl.png"
 };
 const houseRC = {
-    "house" : "Ravenclosure",
-    "master" : "Ellen Degeneres",
+    "house" : "RavenClosure",
+    "master" : "",
     "points" : 0,
     "weekpoints" : 0,
     "owl" : false,
@@ -33,7 +33,7 @@ const houseRC = {
 };
 const houseSIYC = {
     "house" : "SlytherindentYourCode",
-    "master" : "Cameron Esposito",
+    "master" : "",
     "points" : 0,
     "weekpoints" : 0,
     "owl" : false,
@@ -42,7 +42,7 @@ const houseSIYC = {
 };
 const houseGD = {
     "house" : "GryffinDOM",
-    "master" : "Rhea Butcher",
+    "master" : "",
     "points" : 0,
     "weekpoints" : 0,
     "owl" : false,
@@ -72,7 +72,7 @@ db.houses.save(houseGD, (err, results) => {
 // Default password is "MERNmaster90"
 const defaultUser = {
     "user" : "user",
-    "password" : "$2b$10$sYPoVDru7GlfB12LRipNTe8umAqcO2KEMSOrYmICk8rNoeda09B1G",
+    "password" : "UWPlayground",
 }
 db.users.save(defaultUser, (err, results) => {
     if (err) throw err;
