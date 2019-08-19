@@ -195,12 +195,12 @@ app.post("/api/auth", (req, res) => {
         //   }
         // });
         // Fallback to using password in env because bcrypt won't work on Heroku right now
-        // if(process.env.PASS === req.body.password) {
+        if(process.env.PASS === req.body.password) { 
             const token = makeToken(req.body.user);
             res.json({ success: true, token: token, user: req.body.user });
-        // } else {
-        //   res.json({ success: false });
-        // }
+        } else {
+          res.json({ success: false });
+        }
       }
     });
   }
