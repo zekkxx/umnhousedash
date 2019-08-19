@@ -33,7 +33,7 @@ const houseRC = {
     "owlimage" : "rc_owl.png"
 };
 const houseSIYC = {
-    "house" : "SlytherindentYourCode",
+    "house" : "SlytherIndentYourCode",
     "master" : "",
     "points" : 0,
     "weekpoints" : 0,
