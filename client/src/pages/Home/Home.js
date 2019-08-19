@@ -44,7 +44,7 @@ class Home extends Component {
         return (
             <div className="container-fluid">
                 <div className="row mx-5 my-5">
-                    <h1 className="title"><span className="mr-2"><img className="school-logo-image" src="./img/school-logo.jpg" alt="Georgia Tech" /></span> Coding Bootcamp House Points</h1>
+                    <h1 className="title"><span className="mr-2"><img className="school-logo-image" src="./img/school-logo.jpg" alt="University Of Washington" /></span> Coding Bootcamp House Points</h1>
                 </div>
                 {/* <div className="row mx-xl-5 mx-sm-1 mt-2">
                     <div className="col-12">

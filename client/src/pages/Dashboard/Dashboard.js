@@ -126,7 +126,7 @@ class Dashboard extends Component {
             this.state.loggedIn ? (
                 <div className="container-fluid">
                     <div className="row mx-5 my-5 align-items-start">
-                        <h1 className="title"><span className="mr-2"><img className="school-logo-image" src="./img/school-logo.png" alt="Georgia Tech" /></span> House Points Dashboard</h1>
+                        <h1 className="title"><span className="mr-2"><img className="school-logo-image" src="./img/school-logo.jpg" alt="University Of Washington" /></span> House Points Dashboard</h1>
                     </div>
                     <div className="row mx-xl-5 mx-sm-1 mt-5 align-items-center">
                         {this.state.data ? this.state.data.map(item => (
