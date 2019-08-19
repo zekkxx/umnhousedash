@@ -16,7 +16,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Mongo connection
-const db = mongojs(process.env.MONGODB_URI, ["houses", "users", "log", "challenge"]);
+const db = mongojs("mongodb://localhost/uwHouses", ["houses", "users", "log", "challenge"]);
 
 db.on("error", error => {
   console.log("Database Error: ", error);
@@ -173,6 +173,7 @@ app.get("/api/getchallenges", (req, res) => {
 });
 
 app.post("/api/auth", (req, res) => {
+  console.log('REQ.BODY', req.body)
   if (!req.body.user || !req.body.password) {
     res.json({ success: false });
   } else {

@@ -6,7 +6,7 @@ require('dotenv').config();
 // "users" stores any users that can login
 // "log" stores any individual point changes -- LOG IS NOT SEEDED
 // "challenge" stores the current challenge
-const db = mongojs(process.env.MONGODB_URI, ["houses", "users", "log", "challenge"]);
+const db = mongojs("mongodb://localhost/uwHouses", ["houses", "users", "log", "challenge"]);
 
 db.on("error", error => {
   console.log("Database Error: ", error);
