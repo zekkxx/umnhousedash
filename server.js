@@ -16,7 +16,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Mongo connection
-const db = mongojs("mongodb://localhost/uwHouses", ["houses", "users", "log", "challenge"]);
+const db = mongojs(process.env.MONGODB_URI, ["houses", "users", "log", "challenge"]);
 
 db.on("error", error => {
   console.log("Database Error: ", error);
