@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-const connection = process.env.MONGODB_URI || "mongodb://localhost/UWHouseCupDB";
+const connection = process.env.MONGODB_URI || "mongodb://localhost/UMHouseCupDB";
 
 // Mongo connection
 const db = mongojs(connection, ["houses", "users", "log", "challenge"]);
@@ -154,6 +154,7 @@ app.post("/api/owl", (req, res) => {
 
 app.get("/api/get", (req, res) => {
   db.houses.find({}, (err, results) => {
+    console.log('RESULTS: ', results)
     if (err) throw err;
     res.send(results).end();
   });
