@@ -4,12 +4,14 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import NoMatch from "./pages/NoMatch";
+import Info from "./pages/Info";
 
 const App = () => (
   <Router>
     <div>
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path="/info" component={Info} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/dashboard" component={Dashboard} />
         <Route component={NoMatch} />

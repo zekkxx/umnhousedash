@@ -79,7 +79,7 @@ class Home extends Component {
                     <span className="text-white"><strong><span role="img" aria-label="badge">🎖 Current challenge</span></strong> {this.state.challenge}</span>
                 </nav> */}
                 <nav className="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
-                    <span className="text-white"><strong><span role="img" aria-label="badge">🎖 How can I earn points for the house cup?</span></strong> <a href="https://arronjlinton.github.io/HouseCupPoints/">Click here to find out</a></span>
+                    <span className="text-white"><strong><span role="img" aria-label="badge">🎖 How can I earn points for the house cup?</span></strong> <Link to="/info">Click here to find out</Link></span>
                 </nav>
             </div>
         );

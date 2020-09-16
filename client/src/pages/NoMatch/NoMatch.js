@@ -10,7 +10,7 @@ class NoMatch extends Component {
                 </div>
                 <nav className="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
                     <Link to="/"><button type="button" className="btn btn-light mr-3">Scoreboard</button></Link>
-                    <Link to="/login"><button type="button" className="btn btn-outline-light">Login</button></Link>
+                    <Link to="/info"><button type="button" className="btn btn-light mr-3">Information</button></Link>
                 </nav>
             </div>
         );
