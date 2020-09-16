@@ -6,7 +6,7 @@ require('dotenv').config();
 // "users" stores any users that can login
 // "log" stores any individual point changes -- LOG IS NOT SEEDED
 // "challenge" stores the current challenge
-const connection = process.env.MONGODB_URI || "mongodb://localhost/UMHouseCupDB";
+const connection = process.env.MONGODB_URI || "mongodb://localhost/UMNHouseCupDB";
 const db = mongojs(connection, ["houses", "users", "log", "challenge"]);
 
 db.on("error", error => {
@@ -32,8 +32,8 @@ const houseRC = {
     "image" : "rc.png",
     "owlimage" : "rc_owl.png"
 };
-const houseSIYC = {
-    "house" : "SlytherIndentYourCode",
+const houseSI = {
+    "house" : "SlytherIndent",
     "master" : "",
     "points" : 0,
     "weekpoints" : 0,
@@ -53,15 +53,15 @@ const houseGD = {
 
 db.houses.save(houseGH, (err, results) => {
     if (err) throw err;
-    console.log("House Githubblepuff written");
+    console.log("House Githufflepuff written");
 });
 db.houses.save(houseRC, (err, results) => {
     if (err) throw err;
     console.log("House Ravenclosure written");
 });
-db.houses.save(houseSIYC, (err, results) => {
+db.houses.save(houseSI, (err, results) => {
     if (err) throw err;
-    console.log("House SlytherindentYourCode written");
+    console.log("House Slytherindent written");
 });
 db.houses.save(houseGD, (err, results) => {
     if (err) throw err;
@@ -73,7 +73,7 @@ db.houses.save(houseGD, (err, results) => {
 // Default password is "MERNmaster90"
 const defaultUser = {
     "user" : "user",
-    "password" : "UWPlayground",
+    "password" : "password",
 }
 db.users.save(defaultUser, (err, results) => {
     if (err) throw err;

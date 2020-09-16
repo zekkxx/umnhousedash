@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-const connection = process.env.MONGODB_URI || "mongodb://localhost/UMHouseCupDB";
+const connection = process.env.MONGODB_URI || "mongodb://localhost/UMNHouseCupDB";
 
 // Mongo connection
 const db = mongojs(connection, ["houses", "users", "log", "challenge"]);
@@ -196,7 +196,8 @@ app.post("/api/auth", (req, res) => {
         //   }
         // });
         // Fallback to using password in env because bcrypt won't work on Heroku right now
-        if(process.env.PASS === req.body.password) { 
+        console.log(results);
+        if(results[0].password === req.body.password) { 
             const token = makeToken(req.body.user);
             res.json({ success: true, token: token, user: req.body.user });
         } else {
