@@ -4,7 +4,7 @@ import API from "../../utils/API";
 
 class Dashboard extends Component {
     state = {
-        data: "",
+        data: [],
         currentUser: "",
         loggedIn: false,
         Githufflepuff: 0,
@@ -23,25 +23,9 @@ class Dashboard extends Component {
             .catch(err => console.log(err));
     }
 
-    handleIncrease = house => {
-        API.addPoint(house, this.state.currentUser, 1, sessionStorage.getItem("token"))
-            .then(res => {
-                this.getData();
-            })
-            .catch(err => console.log(err));
-    }
-
-    handleSpecificIncrease = house => {
+    handlePointChange = (house, amount) => {
         this.setState({ [house]: 0 });
-        API.addPoint(house, this.state.currentUser, this.state[house], sessionStorage.getItem("token"))
-            .then(res => {
-                this.getData();
-            })
-            .catch(err => console.log(err));
-    }
-
-    handleDecrease = house => {
-        API.addPoint(house, this.state.currentUser, -1, sessionStorage.getItem("token"))
+        API.addPoint(house, this.state.currentUser, amount, sessionStorage.getItem("token"))
             .then(res => {
                 this.getData();
             })
@@ -111,8 +95,8 @@ class Dashboard extends Component {
                                         <h1 className="housePoints">{item.points}</h1>
                                         <div className="center-this">
                                             <div className="btn-group btn-group-lg">
-                                                <button type="button" className="btn btn-secondary" onClick={() => this.handleDecrease(item.house)}>-</button>
-                                                <button type="button" className="btn btn-secondary" onClick={() => this.handleIncrease(item.house)}>+</button>
+                                                <button type="button" className="btn btn-secondary" onClick={() => this.handlePointChange(item.house, -1)}>-</button>
+                                                <button type="button" className="btn btn-secondary" onClick={() => this.handlePointChange(item.house, 1)}>+</button>
                                             </div>
                                         </div>
                                         <div className="center-this">
@@ -121,7 +105,7 @@ class Dashboard extends Component {
                                                     <div className="input-group mb-3">
                                                         <input type="text" className="form-control" placeholder="Points" name={item.house} onChange={this.handlePointsInputChange} value={this.state[item.house]} />
                                                         <div className="input-group-append">
-                                                            <button className="btn btn-outline-secondary" type="button" onClick={() => this.handleSpecificIncrease(item.house)}>Give</button>
+                                                            <button className="btn btn-outline-secondary" type="button" onClick={() => this.handlePointChange(item.house, this.state[item.house])}>Give</button>
                                                         </div>
                                                     </div>
                                                 </div>
