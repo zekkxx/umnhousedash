@@ -1,11 +1,7 @@
 const router = require("express").Router();
-const mongojs = require("mongojs");
+const db = require("../db");
 const ObjectId = require("mongodb").ObjectID;
 // const bcrypt = require('bcrypt');
-
-// Mongo connection
-const connection = process.env.MONGODB_URI || "mongodb://localhost/UMNHouseCupDB";
-const db = mongojs(connection, ["houses", "users", "log", "challenge"]);
 
 // Log Helper Functions
 // Mongo log point change

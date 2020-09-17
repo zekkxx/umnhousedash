@@ -1,9 +1,5 @@
 const router = require("express").Router();
-const mongojs = require("mongojs");
-
-// Mongo connection
-const connection = process.env.MONGODB_URI || "mongodb://localhost/UMNHouseCupDB";
-const db = mongojs(connection, ["houses", "users", "log", "challenge"]);
+const db = require("../db");
 
 // Token Helper Functions
 const makeToken = user => { // Make and store a new token and expiration 
