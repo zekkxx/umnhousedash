@@ -5,18 +5,16 @@ import API from "../../utils/API";
 class Login extends Component {
     state = {
         password: "",
-        username: "user",
         loggedIn: false
     }
 
     handleSubmit = e => {
-        API.authenticateUser(this.state.username, this.state.password).then(res => {
+        API.authenticateUser(this.state.password).then(res => {
             if(res.data.success){
                 sessionStorage.setItem("token", res.data.token);
-                sessionStorage.setItem("user", res.data.user);
                 this.setState({ loggedIn: true });
             } else {
-                alert("That's not the right username or password");
+                alert("That's not the right password");
             }
         });
     }
@@ -33,9 +31,8 @@ class Login extends Component {
 
     componentWillMount(){
         const tokenFromSS = sessionStorage.getItem("token");
-        const userFromSS = sessionStorage.getItem("user");
-        if(tokenFromSS && userFromSS){
-            API.validate(tokenFromSS, userFromSS)
+        if(tokenFromSS){
+            API.validate(tokenFromSS)
                 .then(res => {
                     if(res.data.success === true){
                         this.setState({loggedIn: true});
@@ -55,10 +52,6 @@ class Login extends Component {
                             <div className="card mt-6 mb-5">
                                 <div className="card-body">
                                     <span className="d-flex justify-content-center mt-3"><img className="houseImage" height="200" src="img/mern.png" alt="MERNistry of Magic" /></span>
-                                    {/* To add individual user name support for logging purposes, just add these lines and change default `username` state to a blank string */}
-                                    {/* <div className="input-group mb-3">
-                                        <input type="text" className="form-control" onChange={this.handleOnChange} value={this.state.username} name="username" placeholder="Username" />
-                                    </div> */}
                                     <div className="input-group mb-3 mt-5">
                                         <input type="password" className="form-control" onChange={this.handleOnChange} onKeyPress={this.handleKeyPress} value={this.state.password} name="password" placeholder="Password" />
                                         <div className="input-group-append">

@@ -5,7 +5,6 @@ import API from "../../utils/API";
 class Dashboard extends Component {
     state = {
         data: [],
-        currentUser: "",
         loggedIn: false,
         Githufflepuff: 0,
         Ravenclosure: 0,
@@ -25,7 +24,7 @@ class Dashboard extends Component {
 
     handlePointChange = (house, amount) => {
         this.setState({ [house]: 0 });
-        API.addPoint(house, this.state.currentUser, amount, sessionStorage.getItem("token"))
+        API.addPoint(house, amount, sessionStorage.getItem("token"))
             .then(res => {
                 this.getData();
             })
@@ -33,7 +32,7 @@ class Dashboard extends Component {
     }
 
     handleReset = house => {
-        API.resetWeekPoints(house, this.state.currentUser, sessionStorage.getItem("token"))
+        API.resetWeekPoints(house, sessionStorage.getItem("token"))
             .then(res => {
                 this.getData();
             })
@@ -41,7 +40,7 @@ class Dashboard extends Component {
     }
 
     handleOwl = house => {
-        API.giveOwl(house, this.state.currentUser, sessionStorage.getItem("token"))
+        API.giveOwl(house, sessionStorage.getItem("token"))
             .then(res => {
                 this.getData();
             })
@@ -59,18 +58,16 @@ class Dashboard extends Component {
 
     logout = () => {
         sessionStorage.removeItem("token");
-        sessionStorage.removeItem("user");
-        this.setState({ loggedIn: false, currentUser: "" });
+        this.setState({ loggedIn: false });
     }
 
     componentWillMount() {
         const tokenFromSS = sessionStorage.getItem("token");
-        const userFromSS = sessionStorage.getItem("user");
-        if (tokenFromSS && userFromSS) {
-            API.validate(tokenFromSS, userFromSS)
+        if (tokenFromSS) {
+            API.validate(tokenFromSS)
                 .then(res => {
                     if (res.data.success === true) {
-                        this.setState({ loggedIn: true, currentUser: userFromSS });
+                        this.setState({ loggedIn: true });
                     }
                     this.getData();
                 }).catch(err => console.log(err));
@@ -138,7 +135,7 @@ class Dashboard extends Component {
                     </div>
                     <nav className="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
                         <button type="button" onClick={this.logout} className="btn btn-outline-light">Logout</button>
-                        <span className="ml-3 text-white">You're logged in as {this.state.currentUser.substr(0, 1).toUpperCase() + this.state.currentUser.substr(1, this.state.currentUser.length)}</span>
+                        <span className="ml-3 text-white">You're logged in!</span>
                     </nav>
                 </div>
             ) : (
