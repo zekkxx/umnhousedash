@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import API from "../../utils/API";
 
 class Dashboard extends Component {
     state = {
         data: [],
-        loggedIn: false,
+        loggedIn: true,
         Githufflepuff: 0,
         Ravenclosure: 0,
         Slytherindent: 0,
@@ -68,9 +68,13 @@ class Dashboard extends Component {
                 .then(res => {
                     if (res.data.success === true) {
                         this.setState({ loggedIn: true });
+                        this.getData();
+                    } else {
+                        this.setState({ loggedIn: false});
                     }
-                    this.getData();
                 }).catch(err => console.log(err));
+        } else {
+            this.setState({loggedIn: false});
         }
     }
 
@@ -139,16 +143,8 @@ class Dashboard extends Component {
                     </nav>
                 </div>
             ) : (
-                    <div className="container-fluid">
-                        <div className="row mx-5 my-5">
-                            <h1 className="title">You need to be logged in to view this page</h1>
-                        </div>
-                        <nav className="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
-                            <Link to="/"><button type="button" className="btn btn-light mr-3">Scoreboard</button></Link>
-                            <Link to="/login"><button type="button" className="btn btn-outline-light">Login</button></Link>
-                        </nav>
-                    </div>
-                )
+                <Redirect push to="/login" />
+            )
         );
     }
 }
