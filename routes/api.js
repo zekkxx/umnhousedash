@@ -58,7 +58,7 @@ const validateToken = (user, token) => {
   };
 
 // Routes
-router.get("/get", (req, res) => {
+router.get("/points", (req, res) => {
   db.houses.find({}, (err, results) => {
     console.log('RESULTS: ', results)
     if (err) throw err;
@@ -66,7 +66,7 @@ router.get("/get", (req, res) => {
   });
 });
 
-router.post("/add", (req, res) => {
+router.post("/points", (req, res) => {
     db.houses.find({ house: req.body.house }, (err, results) => {
       if (err) throw err;
       let currentPoints = parseInt(results[0].points);
@@ -75,21 +75,6 @@ router.post("/add", (req, res) => {
       let revisedWeekPoints = currentWeekPoints + parseInt(req.body.points);
       console.log(validateToken(req.body.user, req.body.token));
       dbLog(parseInt(req.body.points), req.body.house);
-      db.houses.update({ house: req.body.house }, { $set: { points: revisedPoints, weekpoints: revisedWeekPoints } }, () => {
-        res.status(200).end();
-      });
-    });
-  });
-  
-  router.post("/subtract", (req, res) => {
-    db.houses.find({ house: req.body.house }, (err, results) => {
-      if (err) throw err;
-      let currentPoints = parseInt(results[0].points);
-      let currentWeekPoints = parseInt(results[0].weekpoints);
-      let revisedPoints = currentPoints - 1;
-      let revisedWeekPoints = currentWeekPoints - 1;
-      console.log(validateToken(req.body.user, req.body.token));
-      dbLog(-1, req.body.house);
       db.houses.update({ house: req.body.house }, { $set: { points: revisedPoints, weekpoints: revisedWeekPoints } }, () => {
         res.status(200).end();
       });

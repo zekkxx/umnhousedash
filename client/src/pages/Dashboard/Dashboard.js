@@ -41,7 +41,7 @@ class Dashboard extends Component {
     }
 
     handleDecrease = house => {
-        API.subtractPoint(house, this.state.currentUser, sessionStorage.getItem("token"))
+        API.addPoint(house, this.state.currentUser, -1, sessionStorage.getItem("token"))
             .then(res => {
                 this.getData();
             })

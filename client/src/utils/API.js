@@ -2,13 +2,10 @@ import axios from "axios";
 
 export default {
   getPoints: function() {
-    return axios.get("/api/get");
+    return axios.get("/api/points");
   },
   addPoint: function(house, user, points, token) {
-    return axios.post("/api/add", { house: house, user: user, token: token, points: points });
-  },
-  subtractPoint: function(house, user, token) {
-    return axios.post("/api/subtract", { house: house, user: user, token: token });
+    return axios.post("/api/points", { house: house, user: user, token: token, points: points });
   },
   resetWeekPoints: function(house, user, token) {
     return axios.post("/api/reset", { house: house, user: user, token: token });
