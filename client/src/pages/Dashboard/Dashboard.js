@@ -6,22 +6,12 @@ class Dashboard extends Component {
     state = {
         data: "",
         currentUser: "",
-        currentChallenge: "",
-        newChallenge: "",
         loggedIn: false,
         Githufflepuff: 0,
         Ravenclosure: 0,
         Slytherindent: 0,
         GryffinDOM: 0
     };
-
-    // getChallenge = () => {
-    //     API.getChallenges()
-    //         .then(res => {
-    //             this.setState({ currentChallenge: res.data.challenge });
-    //         })
-    //         .catch(err => console.log(err));
-    // }
 
     getData = () => {
         API.getPoints()
@@ -83,23 +73,6 @@ class Dashboard extends Component {
         }
     }
 
-    // handleSubmit = e => {
-    //     API.postChallenge(this.state.newChallenge, sessionStorage.getItem("user"), sessionStorage.getItem("token"))
-    //         .then(res => {
-    //             this.getChallenge();
-    //         });
-    // }
-
-    // handleOnChange = e => {
-    //     this.setState({ [e.target.name]: e.target.value });
-    // }
-
-    // handleKeyPress = e => {
-    //     if (e.key === 'Enter') {
-    //         this.handleSubmit();
-    //     }
-    // }
-
     logout = () => {
         sessionStorage.removeItem("token");
         sessionStorage.removeItem("user");
@@ -116,7 +89,6 @@ class Dashboard extends Component {
                         this.setState({ loggedIn: true, currentUser: userFromSS });
                     }
                     this.getData();
-                    // this.getChallenge();
                 }).catch(err => console.log(err));
         }
     }
@@ -180,14 +152,6 @@ class Dashboard extends Component {
                             </div>
                         )) : ""}
                     </div>
-                    {/* <div className="alert mx-xl-5 mb-6 alert-secondary">
-                        <div className="input-group">
-                            <input type="text" className="form-control" onChange={this.handleOnChange} onKeyPress={this.handleKeyPress} value={this.state.newChallenge} name="newChallenge" placeholder={`Current challenge: ${this.state.currentChallenge}`} />
-                            <div className="input-group-append">
-                                <button className="btn btn-outline-secondary" onClick={this.handleSubmit} type="submit">Post</button>
-                            </div>
-                        </div>
-                    </div> */}
                     <nav className="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
                         <button type="button" onClick={this.logout} className="btn btn-outline-light">Logout</button>
                         <span className="ml-3 text-white">You're logged in as {this.state.currentUser.substr(0, 1).toUpperCase() + this.state.currentUser.substr(1, this.state.currentUser.length)}</span>

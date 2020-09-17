@@ -21,11 +21,5 @@ export default {
   },
   validate: function(token, user) {
     return axios.post("/auth/validate", { token: token, user: user });
-  },
-  postChallenge: function(challenge, user, token) {
-    return axios.post("/api/challenge", { challenge: challenge, user: user, token: token });
-  },
-  getChallenges: function() {
-    return axios.get("/api/getchallenges");
   }
 };

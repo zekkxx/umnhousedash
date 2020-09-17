@@ -1,4 +1,4 @@
-const mongojs = require("mongojs");
+const db = require("./db");
 require('dotenv').config();
 
 // Mongo connection
@@ -6,12 +6,6 @@ require('dotenv').config();
 // "users" stores any users that can login
 // "log" stores any individual point changes -- LOG IS NOT SEEDED
 // "challenge" stores the current challenge
-const connection = process.env.MONGODB_URI || "mongodb://localhost/UMNHouseCupDB";
-const db = mongojs(connection, ["houses", "users", "log", "challenge"]);
-
-db.on("error", error => {
-  console.log("Database Error: ", error);
-});
 
 // HOUSES
 const houseGH = {
@@ -68,7 +62,8 @@ db.houses.save(houseGD, (err, results) => {
     console.log("House GryffinDOM written");
 });
 
-// USERS
+// USERS -- Desire to REMOVE Users from project. Use .env w/ basic password
+// ?? TOKEN ??
 // Default username is "user"
 // Default password is "MERNmaster90"
 const defaultUser = {
@@ -78,13 +73,4 @@ const defaultUser = {
 db.users.save(defaultUser, (err, results) => {
     if (err) throw err;
     console.log("Default user written");
-});
-
-// CHALLENGE
-const challengeDocument = {
-    "challenge" : "15 points to the largest study group by 10pm Sunday"
-}
-db.challenge.save(challengeDocument, (err, results) => {
-    if (err) throw err;
-    console.log("Challenge document written");
 });

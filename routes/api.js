@@ -1,7 +1,5 @@
 const router = require("express").Router();
 const db = require("../db");
-const ObjectId = require("mongodb").ObjectID;
-// const bcrypt = require('bcrypt');
 
 // Log Helper Functions
 // Mongo log point change
@@ -10,19 +8,6 @@ const dbLog = (user, points, house) => {
       user: user,
       points: points,
       house: house,
-      ts: new Date().toString()
-    };
-    db.log.save(logEntry, (err, results) => {
-      if (err) throw err;
-      return true;
-    });
-  };
-  
-  // Mongo log new challenge
-  const dbChallengeLog = (user, challenge) => {
-    const logEntry = {
-      user: user,
-      challenge: challenge,
       ts: new Date().toString()
     };
     db.log.save(logEntry, (err, results) => {
@@ -128,27 +113,5 @@ router.post("/add", (req, res) => {
       res.send(results).end();
     });
   });
-  
-  router.post("/challenge", (req, res) => {
-    dbChallengeLog(req.body.user, req.body.challenge);
-    db.challenge.update({ "_id": ObjectId("5b7cf1d6b48b0921af336561") }, { $set: { challenge: req.body.challenge } }, () => {
-      res.status(200).end();
-    });
-  });
-  
-  router.get("/getchallenges", (req, res) => {
-    db.challenge.find({ "_id": ObjectId("5b7cf1d6b48b0921af336561") }, (err, results) => {
-      if (err) throw err;
-      res.json({ challenge: results[0].challenge });
-    });
-  });
-
-  // HASHING ROUTE
-    // Uncomment this to make the hash function available for making new users
-    // app.post("/api/hash", (req, res) => {
-    //   bcrypt.hash(req.body.password, 10, function(err, hash) {
-    //     res.json({ hash: hash });
-    //   });
-    // });
 
 module.exports = router;

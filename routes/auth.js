@@ -23,18 +23,6 @@ router.post("", (req, res) => {
         if (!results[0]) {
           res.json({ success: false });
         } else {
-          // bcrypt.compare(req.body.password, results[0].password, function (err, result) {
-          //   if (err) throw err;
-          //   if (result === true) {
-          //     const token = makeToken(req.body.user);
-          //     res.json({ success: true, token: token, user: req.body.user });
-          //   } else if (result === false) {
-          //     res.json({ success: false });
-          //   } else {
-          //     res.json({ success: false });
-          //   }
-          // });
-          // Fallback to using password in env because bcrypt won't work on Heroku right now
           console.log(results);
           if(results[0].password === req.body.password) { 
               const token = makeToken(req.body.user);
