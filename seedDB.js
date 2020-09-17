@@ -1,11 +1,9 @@
 const db = require("./db");
 require('dotenv').config();
 
-// Mongo connection
 // "houses" stores the houses available, their names, images, points, and owl status
 // "users" stores any users that can login
 // "log" stores any individual point changes -- LOG IS NOT SEEDED
-// "challenge" stores the current challenge
 
 // HOUSES
 const houseGH = {
@@ -65,7 +63,7 @@ db.houses.save(houseGD, (err, results) => {
 // USERS -- Desire to REMOVE Users from project. Use .env w/ basic password
 // ?? TOKEN ??
 // Default username is "user"
-// Default password is "MERNmaster90"
+// Default password is "password"
 const defaultUser = {
     "user" : "user",
     "password" : "password",

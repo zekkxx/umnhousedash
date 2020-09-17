@@ -3,9 +3,8 @@ const db = require("../db");
 
 // Log Helper Functions
 // Mongo log point change
-const dbLog = (user, points, house) => {
+const dbLog = (points, house) => {
     const logEntry = {
-      user: user,
       points: points,
       house: house,
       ts: new Date().toString()
@@ -59,6 +58,14 @@ const validateToken = (user, token) => {
   };
 
 // Routes
+router.get("/get", (req, res) => {
+  db.houses.find({}, (err, results) => {
+    console.log('RESULTS: ', results)
+    if (err) throw err;
+    res.send(results).end();
+  });
+});
+
 router.post("/add", (req, res) => {
     db.houses.find({ house: req.body.house }, (err, results) => {
       if (err) throw err;
@@ -67,7 +74,7 @@ router.post("/add", (req, res) => {
       let revisedPoints = currentPoints + parseInt(req.body.points);
       let revisedWeekPoints = currentWeekPoints + parseInt(req.body.points);
       console.log(validateToken(req.body.user, req.body.token));
-      dbLog(req.body.user, parseInt(req.body.points), req.body.house);
+      dbLog(parseInt(req.body.points), req.body.house);
       db.houses.update({ house: req.body.house }, { $set: { points: revisedPoints, weekpoints: revisedWeekPoints } }, () => {
         res.status(200).end();
       });
@@ -82,7 +89,7 @@ router.post("/add", (req, res) => {
       let revisedPoints = currentPoints - 1;
       let revisedWeekPoints = currentWeekPoints - 1;
       console.log(validateToken(req.body.user, req.body.token));
-      dbLog(req.body.user, -1, req.body.house);
+      dbLog(-1, req.body.house);
       db.houses.update({ house: req.body.house }, { $set: { points: revisedPoints, weekpoints: revisedWeekPoints } }, () => {
         res.status(200).end();
       });
@@ -103,14 +110,6 @@ router.post("/add", (req, res) => {
         if(err) throw err;
         res.status(200).end();
       });
-    });
-  });
-  
-  router.get("/get", (req, res) => {
-    db.houses.find({}, (err, results) => {
-      console.log('RESULTS: ', results)
-      if (err) throw err;
-      res.send(results).end();
     });
   });
 
