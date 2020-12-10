@@ -5,6 +5,11 @@ require('dotenv').config();
 // "users" stores any users that can login
 // "log" stores any individual point changes -- LOG IS NOT SEEDED
 
+// WIPE
+db.dropDatabase((err, res) => {
+    if (err) throw err;
+    console.log("All collections reset")
+});
 // HOUSES
 const houses = [{
     "house" : "GitHufflePuff",
@@ -36,11 +41,6 @@ const houses = [{
     "owlimage" : "gd_owl.png"
 }];
 
-db.houses.runCommand('drop', (err, res) => {
-    if (err) throw err;
-    console.log("House collection dropped");
-});
-
 const bulk = db.houses.initializeOrderedBulkOp();
 houses.forEach(house => {
     bulk.insert(house);
@@ -49,6 +49,6 @@ houses.forEach(house => {
 
 bulk.execute((err, res) => {
     if (err) throw err;
-    console.log("House collection populated")
+    console.log("House collections populated")
     process.exit();
 })
