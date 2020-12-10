@@ -1,4 +1,4 @@
-const db = require("./db");
+const db = require("../db");
 require('dotenv').config();
 
 // "houses" stores the houses available, their names, images, points, and owl status
@@ -6,69 +6,49 @@ require('dotenv').config();
 // "log" stores any individual point changes -- LOG IS NOT SEEDED
 
 // HOUSES
-const houseGH = {
+const houses = [{
     "house" : "GitHufflePuff",
-    "master" : "",
     "points" : 0,
     "weekpoints" : 0,
     "owl" : false,
     "image" : "gh.png",
     "owlimage" : "gh_owl.png"
-};
-const houseRC = {
+}, {
     "house" : "RavenClosure",
-    "master" : "",
     "points" : 0,
     "weekpoints" : 0,
     "owl" : false,
     "image" : "rc.png",
     "owlimage" : "rc_owl.png"
-};
-const houseSI = {
+}, {
     "house" : "SlytherIndent",
-    "master" : "",
     "points" : 0,
     "weekpoints" : 0,
     "owl" : false,
     "image" : "siyc.png",
     "owlimage" : "siyc_owl.png"
-};
-const houseGD = {
+}, {
     "house" : "GryffinDOM",
-    "master" : "",
     "points" : 0,
     "weekpoints" : 0,
     "owl" : false,
     "image" : "gd.png",
     "owlimage" : "gd_owl.png"
-};
+}];
 
-db.houses.save(houseGH, (err, results) => {
+db.houses.runCommand('drop', (err, res) => {
     if (err) throw err;
-    console.log("House Githufflepuff written");
-});
-db.houses.save(houseRC, (err, results) => {
-    if (err) throw err;
-    console.log("House Ravenclosure written");
-});
-db.houses.save(houseSI, (err, results) => {
-    if (err) throw err;
-    console.log("House Slytherindent written");
-});
-db.houses.save(houseGD, (err, results) => {
-    if (err) throw err;
-    console.log("House GryffinDOM written");
+    console.log("House collection dropped");
 });
 
-// USERS -- Desire to REMOVE Users from project. Use .env w/ basic password
-// ?? TOKEN ??
-// Default username is "user"
-// Default password is "password"
-const defaultUser = {
-    "user" : "user",
-    "password" : "password",
-}
-db.users.save(defaultUser, (err, results) => {
-    if (err) throw err;
-    console.log("Default user written");
+const bulk = db.houses.initializeOrderedBulkOp();
+houses.forEach(house => {
+    bulk.insert(house);
+    console.log(`House ${house.house} prepared`);
 });
+
+bulk.execute((err, res) => {
+    if (err) throw err;
+    console.log("House collection populated")
+    process.exit();
+})

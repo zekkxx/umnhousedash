@@ -92,7 +92,6 @@ class Dashboard extends Component {
                                     <div className="card-body">
                                         <p><img className="houseImage" height="200" src={item.owl ? `img/${item.owlimage}` : `img/${item.image}`} alt={item.house} /></p>
                                         <h5 className="houseName">{item.house}</h5>
-                                        <h6 className="houseMaster mb-2 text-muted">House Master: {item.master}</h6>
                                         <h1 className="housePoints">{item.points}</h1>
                                         <div className="center-this">
                                             <div className="btn-group btn-group-lg">

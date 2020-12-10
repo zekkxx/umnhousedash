@@ -2,36 +2,71 @@
 
 ## Introduction
 
-The house points dashboard app was developed by Hannah A. Patellis and Cj Jordan for the August 2018 Georgia Institute of Technology Web Application Development Coding Bootcamp.
+The house points dashboard app was developed by Hannah A. Patellis and Cj Jordan for the August 2018 Georgia Institute of Technology Web Application Development Coding Bootcamp. 
 
-We decided to split the class into Harry Potter-themed "houses" and keep points to give students an incentive to do things like...
+This implementation was forked from and updated by Kieran Anthony for use with the University of Minnesota.
+
+Hannah and Cj decided to split the class into Harry Potter-themed "houses" and keep points to give students an incentive to do things like...
 
 * Show up to office hours (+1 point for each student from a house to show up on time for office hours)
 * Give an exceptional answer during class
 * Help other students
 * Form study groups and post photos as proof (+1 point per student to show up, for example)
 
-The idea started to snowball as we gave the houses nerdy coding pun names, house crests, and the addition of a stuffed owl awarded to the house that earned the most points in that week. If they got the owl that house would get a 24 hour extention on their homework for that week.
+The idea started to snowball as they gave the houses nerdy coding pun names, house crests, and the addition of a stuffed owl awarded to the house that earned the most points in that week. Originally if they got the owl that house would get a 24 hour extention on their homework for that week.
 
-We found this really boosted moral in our class and we hope it does the same for your class.
+They have found that this really boosted moral in their class and we hope it does the same for your class.
 
 You are free to use the house crest artwork and our house names. Just attribute if asked, don't try to pass it off as your own, et cetera.
 
 ## Setting it up
 
-The application is made to run on Heroku with a mLab Mongo database.
+The application is made to run on Heroku with a Mongo Atlas database.
 
-* Create a Heroku app and provision it with an mLab Mongo database
 * Clone this repo
-* Create a local `.env` file with a `MONGODB_URI` value containing your mLab Mongo database URL (from Heroku)
 * Run `npm install` or `yarn install`
-* Run `node seedDB.js` to seed the database with initial values
+* Create a local `.env` file with the following values:
+  * `MONGODB_URI` (recommended)
+    * Consider using Mongo Atlas
+  * `PASSCODE` (required)
+    * This will be your password on localhost
+* Run `node seedDB.js` to generate the database
+  * If you provided the `MONGODB_URI` value this should populate the deployed MongoDB.
+* Create a Heroku app and provision it with `MONGODB_URI` and `PASSCODE` Config Variables
+* Deploy to Heroku
 
-## The database
+## The Database
 
-#### How the database is setup
+The Database is set up to hold 3 collections. `Houses`, `Tokens`, and `Logs`. They are as below:
 
-#### What seedDB.js does
+```
+"House": {
+    "house" : "House Name",
+    "points" : 0,
+    "weekpoints" : 0,
+    "owl" : false,
+    "image" : "house.png",
+    "owlimage" : "house_owl.png"
+}
+```
+The `House` collection is designed to create individual houses and keep track of their points, possession of the owl, and other information.
+```
+"Token": {
+    "token" : "Token String",
+    "expires" : 123456789.0
+}
+```
+The `Token` collection is designed to keep track of existing token strings, and their converted expiration times.
+```
+"Log": {
+    "points" : 0,
+    "house" : "House Name",
+    "ts" : "Thu Nov 26 2020 12:00:00 GMT-0600 (Central Daylight Time)"
+}
+```
+The `Log` collection is designed to keep track of changes to House Points.
+
+`seedDB.js` is a file designed to set up all of the information needed to begin a fresh installation of this application. This application will override the current house data with initialized data.
 
 ## Features
 
