@@ -1,7 +1,7 @@
 {
-  "name": "gthousedash",
+  "name": "mnhousedash",
   "version": "0.1.0",
-  "description": "House point dashboard for Georgia Tech coding bootcamp",
+  "description": "House point dashboard for UofM coding bootcamp",
   "private": true,
   "proxy": "http://localhost:3001/",
   "dependencies": {

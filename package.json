@@ -1,7 +1,7 @@
 {
-  "name": "gthousedash",
+  "name": "mnhousedash",
   "version": "1.0.0",
-  "description": "House point dashboard for Georgia Tech coding bootcamp",
+  "description": "House point dashboard for UofM coding bootcamp",
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",

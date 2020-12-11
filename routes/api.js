@@ -5,8 +5,7 @@ const db = require("../db");
 // Mongo log point change
 const dbLog = (points, house) => {
     const logEntry = {
-      points: points,
-      house: house,
+      points, house,
       ts: new Date().toString()
     };
     db.log.insertOne(logEntry, (err, results) => {
